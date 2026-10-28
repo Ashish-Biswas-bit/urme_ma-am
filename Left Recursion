@@ -1,0 +1,17 @@
+
+A = input("Enter LHS: ")
+rhs = input("Enter RHS (use |): ").split("|")
+
+alpha = [r.strip()[len(A):] for r in rhs if r.strip().startswith(A)]
+beta = [r.strip() for r in rhs if not r.strip().startswith(A)]
+
+if alpha:
+    print("Left Recursion Found")
+    if beta:
+        print(A, "->", " | ".join(b + A + "'" for b in beta))
+        print(A + "' ->", " | ".join(a + A + "'" for a in alpha), "| epsilon")
+    else:
+        print("Cannot eliminate: no beta production")
+else:
+    print("No Left Recursion Found")
+
